@@ -3,6 +3,11 @@
 
   outputs = { self }: {
     templates = {
+        decSysConf = {
+          path = ./decSysConf;
+          description = "Flake realizing a declarative system configuration";
+        };
+
         default = self.templates.nixShell;
 
         nixShell = {
