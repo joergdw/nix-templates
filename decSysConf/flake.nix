@@ -22,7 +22,7 @@
   description = "A declarative system installation using nix-flakes";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05"; # also possible: `"github:NixOS/nixpkgs/nixos-unstable";`
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11"; # also possible: `"github:NixOS/nixpkgs/nixos-unstable";`
   };
 
   outputs = { self, nixpkgs }:
