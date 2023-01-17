@@ -28,36 +28,34 @@
   outputs = { self, nixpkgs }:
     let
       # Choose another system, in case this is not yours, e.g.: "x86_64-darwin" "aarch64-linux" "aarch64-darwin"
-      supported_systems = [ "x86_64-linux" ];
-
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = nixpkgs.lib.genAttrs supported_systems;
-
-      # Nixpkgs instantiated for supported system types.
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      # For a complete list of valid systems, see:
+      # <https://github.com/numtide/flake-utils/blob/04c1b180862888302ddfb2e3ad9eaa63afc60cf8/default.nix>
+      supported_system = "x86_64-linux";
     in {
-      packages = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in {
-          default = self.packages.${system}.myStdPackages;
+      packages = {
+        ${supported_system} =
+          let
+            pkgs = import nixpkgs { system = supported_system; };
+          in {
+            default = self.packages.${supported_system}.myStdPackages;
 
-          myStdPackages =
-            let
-              pkgs = nixpkgs.legacyPackages.${system}; # here we need just legacy packages
-            in pkgs.buildEnv {
-              name = "My standard packages";
-              paths = with pkgs; [
-                bat
-                ripgrep
-                # […]
-              ];
+            myStdPackages =
+              let
+                pkgs = nixpkgs.legacyPackages.${supported_system}; # here we need just legacy packages
+              in pkgs.buildEnv {
+                name = "My standard packages";
+                paths = with pkgs; [
+                  bat
+                  ripgrep
+                  # […]
+                ];
 
-               extraOutputsToInstall = [ "man" "doc" ];
-            };
+                extraOutputsToInstall = [ "man" "doc" ];
+              };
 
-          ## You can define further collections as above and install them similarly:
-          #myRustPackages = …
-        }); # packages
+            ## You can define further collections as above and install them similarly:
+            #myRustPackages = …
+          };
+      }; # packages
     }; # outputs
 }

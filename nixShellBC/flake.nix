@@ -10,8 +10,9 @@
   outputs = { self, nixpkgs }:
     let
       # Instead of using the subsequent list of self-defined helpers, one could use
-      # `flake-utils.url = "github:numtide/flake-utils";` as input which provides
-      # similar helpers and keeps them up-to-date.
+      # `flake-utils` as additional argument (this does not require an additional input)
+      # which provides similar helpers and keeps them up-to-date.
+      # For more information on this, see: <https://github.com/numtide/flake-utils>
 
       # List all systems that should be supported. See
       # <https://github.com/numtide/flake-utils/blob/04c1b180862888302ddfb2e3ad9eaa63afc60cf8/default.nix>
