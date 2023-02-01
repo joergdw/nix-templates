@@ -51,6 +51,18 @@
                 ];
 
                 extraOutputsToInstall = [ "man" "doc" ];
+                # Regarding manpage-outputs:
+                # To make use of the manpages, usually nothing is required but
+                # including `source "${HOME}/.nix-profile/etc/profile.d/nix.sh"`
+                # somewhere in the `"${HOME}/.profile"` or `"${HOME}/.bash_profile"` or `"${HOME}/.zshenv"`.
+                #
+                # You can verify the inclusion of the revelant directories via `manpath --debug`.
+      
+                # Regarding shell-completion:
+                # With bash, everything should work out of the box.
+                # With zsh, the following needs to be done somewhere in the ``:
+                # fpath=("${HOME}/.nix-profile/share/zsh/site-functions" ${fpath})`
+                # See: <https://unix.stackexchange.com/questions/213593/how-to-add-a-dir-to-fpath>
               };
 
             ## You can define further collections as above and install them similarly:
