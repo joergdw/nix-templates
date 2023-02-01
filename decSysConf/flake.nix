@@ -60,7 +60,7 @@
       
                 # Regarding shell-completion:
                 # With bash, everything should work out of the box.
-                # With zsh, the following needs to be done somewhere in the ``:
+                # With zsh, the following needs to be done somewhere in the `"${HOME}/.zshenv"`:
                 # fpath=("${HOME}/.nix-profile/share/zsh/site-functions" ${fpath})`
                 # See: <https://unix.stackexchange.com/questions/213593/how-to-add-a-dir-to-fpath>
               };
