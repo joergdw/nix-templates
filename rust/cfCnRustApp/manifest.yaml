@@ -1,0 +1,13 @@
+---
+# version: 1 # implicitly set
+applications:
+ - name: cf-rust-app
+# - path: ./ # implicitly set
+   instances: 1
+   disk_quota: 128MB
+   memory: 64MB
+   routes:
+    - route: # TODO: set your route
+      protocol: http1
+   env:
+      TINI_SUBREAPER: true # Needed for tini to work even when not having PID 1.

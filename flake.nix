@@ -3,6 +3,14 @@
 
   outputs = { self }: {
     templates = {
+      cfRustApp = {
+        path = ./rust/cfCnRustApp;
+        description = ''
+          Template for buildin a cloud-native cloudfoundry-application
+          with Rust, using cloud-native buildpackages.
+        ''
+      };
+
       decSysConf = {
         path = ./decSysConf;
         description = "Flake realizing a declarative system configuration";

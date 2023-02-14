@@ -1,0 +1,37 @@
+.ONESHELL:
+SHELL := /bin/bash
+.SHELLFLAGS := -euo pipefail -c
+
+# Cloudfoundry requires all applications that directly provide their docker-image,
+# the domain of the registry and the name of the repository.
+# TODO: You need to adapt these parameters with those for your own repository.
+DOCKER_REGISTRY := docker.io
+DOCKER_REPOSITORY := cf-rust-app
+
+BUILDPACK := paketo-community/rust@0.18.0
+
+rust_project_name := cf-rust-app # “rust_project_name” should match package name in Cargo.toml
+app_name := $(rust_project_name) # Name of the app for cloudfoundry
+rust_src_files = $(shell find ./src -name '*.rs')
+
+# This target creates a docker-image of the whole application, stores it in the local
+# docker registry and exports the file-system of the docker-image. The latter serves for
+# both: as marker that the image already has been created as well as for easy
+# inspection of the image's content.
+buildpacks-image: ./target/$(rust_project_name).image-buildpack.tar.zst
+./target/$(rust_project_name).image-buildpack.tar.zst: Cargo.toml $(rust_src_files)
+	mkdir --parents './target'
+	pack build '$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)' --buildpack='$(BUILDPACK)'
+	docker image save '$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY):latest' | zstd > './target/$(rust_project_name).image-buildpack.tar.zst'
+
+.PHONY: cf-push
+cf-push:
+	@echo "Selected docker registry: $(DOCKER_REGISTRY)"
+	@echo 'username to use: '
+	@read CF_DOCKER_USERNAME
+	cf push '$(app_name)' --docker-image='$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)' --docker-username='$${CF_DOCKER_USERNAME}'
+
+clean: ./target
+	rm --recursive --force ./target
+	images_to_remove="$(shell docker images --format '{{.Repository}}:{{.Tag}}' --filter='reference=$(DOCKER_REGISTRY)/$(DOCKER_REPO)*')"
+  docker image remove '$${images_to_remove}'
