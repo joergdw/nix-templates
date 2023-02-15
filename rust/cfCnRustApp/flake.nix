@@ -43,10 +43,11 @@
               in builtins.substring 0 8 lastModifiedDate;
             src = ./.;
 
-            # TODO: Insert correct hash.
-            # This hash is needed together with the Cargo.lock-file to ensure reproducability.
-            # Build the package once and then take the actual hash from the failed build.
-            cargoSha256 = pkgs.lib.fakeSha256;
+            # ⚠️ A Cargo.lock-file or similar is needed for reproducability.
+            cargoLock.lockFile = ./Cargo.lock;
+            ## If you don't want to use a Cargo.lock-file: TODO: Insert correct hash.
+            ## Build the package once and then take the actual hash from the failed build.
+            # cargoSha256 = pkgs.lib.fakeSha256;
           };
         });
 
