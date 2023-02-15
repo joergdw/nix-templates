@@ -6,7 +6,7 @@
   '';
 
   inputs = {
-    # Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
+    # TODO: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
     # preferably stable ones!
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
   };
@@ -29,14 +29,26 @@
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in {
-      # packages = forAllSystems (system:
-      #   let
-      #     pkgs = nixpkgsFor.${system};
-      #   in {
-      #     default = null;
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in {
+          default = self.packages.${system}.rustApp;
 
-      #     rustApp = pkgs.rustPlatform.buildRustPackage {};
-      #   });
+          rustApp = pkgs.rustPlatform.buildRustPackage {
+            pname = "cf-rust-app"; # TODO: Modify this to you need.
+            version = # TODO: Change version-numbering, if needed.
+              let
+                lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
+              in builtins.substring 0 8 lastModifiedDate;
+            src = ./.;
+
+            # TODO: Insert correct hash.
+            # This hash is needed together with the Cargo.lock-file to ensure reproducability.
+            # Build the package once and then take the actual hash from the failed build.
+            cargoSha256 = pkgs.lib.fakeSha256;
+          };
+        });
 
       devShells = forAllSystems (system:
         let
