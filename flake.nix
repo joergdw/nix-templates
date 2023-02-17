@@ -32,11 +32,13 @@
           It contains an examle-package that you can install via `nix profile install '.#default'`.
           That package is a collection of the listed software. You can add or remove anything
           in the list and after an update, the installed software will be adapted. See the
-          comments in the flake.nix
+          comments in the flake.nix.
 
-          There are some things you need to adapt following the comments in the flake.nix-file:
+          There are some things you need to adapt following the `TODO`-comments in the flake.nix-file:
            + The parameter for `supported_system`.
            + Set `config.allowUnfree = true;` if you need to inlcude non-free software into your collections.
+           + Select additional outputs;
+           + Install the default-package;
            + Check if the manpages are accessible from commandline.
            + Check if the shell-completion works. If not, follow the instructions in the comments of the flake.nix-file.
         '';
