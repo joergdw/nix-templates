@@ -12,7 +12,9 @@
   description = "A declarative system installation using nix-flakes;";
 
   inputs = {
-    nixpkgsRepo.url = "github:NixOS/nixpkgs/nixos-22.11"; # also possible: `"github:NixOS/nixpkgs/nixos-unstable";`
+    # TODO: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
+    # preferably stable ones!
+    nixpkgsRepo.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = { self, nixpkgsRepo }:

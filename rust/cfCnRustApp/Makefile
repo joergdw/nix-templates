@@ -10,6 +10,7 @@ DOCKER_REPOSITORY := cf-rust-app
 
 BUILDPACK := paketo-community/rust@0.18.0
 
+# TODO: Adapt the project-name.
 rust_project_name := cf-rust-app # “rust_project_name” should match package name in Cargo.toml
 app_name := $(rust_project_name) # Name of the app for cloudfoundry
 rust_src_files = $(shell find ./src -name '*.rs')
