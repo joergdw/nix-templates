@@ -10,10 +10,12 @@ DOCKER_REPOSITORY := cf-rust-app
 
 BUILDPACK := paketo-community/rust@0.25.0
 
-# TODO: Adapt the project-name.
-rust_project_name := cf-rust-app # “rust_project_name” should match package name in Cargo.toml
-app_name := $(rust_project_name) # Name of the app for cloudfoundry
+# TODO: Adapt “rust_project_name”: It should match package name in Cargo.toml.
+rust_project_name := cf-rust-app
 rust_src_files = $(shell find ./src -name '*.rs')
+
+# Name of the app for cloudfoundry: It should match the one in the manifest.yaml.
+app_name := $(rust_project_name)
 
 # This target creates a docker-image of the whole application, stores it in the local
 # docker registry and exports the file-system of the docker-image. The latter serves for
