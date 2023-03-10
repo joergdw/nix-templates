@@ -11,10 +11,10 @@
         '';
         welcomeText = ''
           You have just created a template for a cloud-native rust-application running
-          on cloudfoundry and build via a cloud-native buildpack.).
+          on cloudfoundry and built via a cloud-native buildpack.
 
           To perform a minimal run, you need to configure appropriate values for
-          DOCKER_REGISTRY and DOCKER_REPOSITORY in the Makefile and an appropriate
+          `DOCKER_REGISTRY` and `DOCKER_REPOSITORY` in the Makefile and an appropriate
           route in the manifest. See comments in those files. You additionally
           need a working cloudfoundry-user and cloudfoundry-space.
 
