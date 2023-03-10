@@ -1,7 +1,7 @@
 ---
 # version: 1 # implicitly set
 applications:
- - name: cf-rust-app
+ - name: cf-rust-app # TODO: adapt
 # - path: ./ # implicitly set
    instances: 1
    disk_quota: 128MB

@@ -27,6 +27,10 @@
 
           In the cargo.toml, you should adapt the package-name accordingly.
 
+          And in the manifest.yaml you need to adapt the following things:
+            + Adapt the app-name.
+            + You must set the route.
+
           There are as well some TODOs in the Makefile.
             + Adapt docker-registry and repository.
             + Adapt the project-name.

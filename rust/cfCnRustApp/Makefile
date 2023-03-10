@@ -36,7 +36,7 @@ cf-push:
 	@echo "Selected docker registry: $(DOCKER_REGISTRY)"
 	@echo 'username to use: '
 	@read CF_DOCKER_USERNAME
-	cf push '$(app_name)' --docker-image='$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)' --docker-username='$${CF_DOCKER_USERNAME}'
+	cf push '$(app_name)' --docker-image='$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)' --docker-username=$${CF_DOCKER_USERNAME}
 
 clean: ./target
 	rm --recursive --force ./target
