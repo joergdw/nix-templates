@@ -8,7 +8,7 @@ SHELL := /bin/bash
 DOCKER_REGISTRY := docker.io
 DOCKER_REPOSITORY := cf-rust-app
 
-BUILDPACK := paketo-community/rust@0.18.0
+BUILDPACK := paketo-community/rust@0.25.0
 
 # TODO: Adapt the project-name.
 rust_project_name := cf-rust-app # “rust_project_name” should match package name in Cargo.toml
@@ -25,6 +25,12 @@ buildpacks-image: ./target/$(rust_project_name).image-buildpack.tar.zst
 	pack build '$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)' --buildpack='$(BUILDPACK)'
 	docker image save '$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY):latest' | zstd > './target/$(rust_project_name).image-buildpack.tar.zst'
 
+# Supposed to work with the tags created by this file, e.g.: “latest”, …
+docker-release-%:
+	@ARTIFACT="$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY):$*"
+	@echo "Uploading image" "$${ARTIFACT}"
+	@docker push "$${ARTIFACT}"
+
 .PHONY: cf-push
 cf-push:
 	@echo "Selected docker registry: $(DOCKER_REGISTRY)"
@@ -34,5 +40,5 @@ cf-push:
 
 clean: ./target
 	rm --recursive --force ./target
-	images_to_remove="$(shell docker images --format '{{.Repository}}:{{.Tag}}' --filter='reference=$(DOCKER_REGISTRY)/$(DOCKER_REPO)*')"
-  docker image remove '$${images_to_remove}'
+	images_to_remove="$(shell docker images --format '{{.Repository}}:{{.Tag}}' --filter='reference=$(DOCKER_REGISTRY)/$(DOCKER_REPOSITORY)*')"
+	docker image remove $${images_to_remove}
