@@ -40,6 +40,7 @@
               name = "My standard packages";
               paths = with nixpkgs; [
                 bat
+                direnv
                 ripgrep
                 # […]
               ];
