@@ -6,7 +6,7 @@
   '';
 
   inputs = {
-    # TODO: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
+    # 🚧 To-do: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
     # preferably stable ones!
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
@@ -36,8 +36,8 @@
           default = self.packages.${system}.rustApp;
 
           rustApp = pkgs.rustPlatform.buildRustPackage {
-            pname = "cf-rust-app"; # TODO: Modify this to you need.
-            version = # TODO: Change version-numbering, if needed.
+            pname = "cf-rust-app"; # 🚧 To-do: Modify this to you need.
+            version = # 🚧 To-do: Change version-numbering, if needed.
               let
                 lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
               in builtins.substring 0 8 lastModifiedDate;
@@ -45,7 +45,7 @@
 
             # ⚠️ A Cargo.lock-file or similar is needed for reproducability.
             cargoLock.lockFile = ./Cargo.lock;
-            ## If you don't want to use a Cargo.lock-file: TODO: Insert correct hash.
+            ## If you don't want to use a Cargo.lock-file: 🚧 To-do: Insert correct hash.
             ## Build the package once and then take the actual hash from the failed build.
             # cargoSha256 = pkgs.lib.fakeSha256;
           };

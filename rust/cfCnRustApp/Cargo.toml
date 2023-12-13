@@ -1,5 +1,5 @@
 [package]
-name = "cf-rust-app" # TODO: Adapt package name.
+name = "cf-rust-app" # 🚧 To-do: Adapt package name.
 version = "0.1.0"
 edition = "2021"
 

@@ -12,14 +12,14 @@
   description = "A declarative system installation using nix-flakes;";
 
   inputs = {
-    # TODO: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
+    # 🚧 To-do: Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
     # preferably stable ones!
     nixpkgsRepo.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = { self, nixpkgsRepo }:
     let
-      # TODO: Choose another system, in case this is not yours.
+      # 🚧 To-do: Choose another system, in case this is not yours.
       # You should be able to get it via executing `nix eval --impure --raw --expr 'builtins.currentSystem'`
       # on a terminal.
       # Other common values are "x86_64-darwin", "aarch64-linux" and "aarch64-darwin".
@@ -29,7 +29,7 @@
 
       nixpkgs = import nixpkgsRepo {
         system = supported_system;
-        # config.allowUnfree = true; # TODO: Set this, if you want to include non-free software.
+        # config.allowUnfree = true; # 🚧 To-do: Set this, if you want to include non-free software.
       };
     in {
       packages = {
@@ -44,19 +44,19 @@
                 # […]
               ];
 
-              # TODO: Choose which extra outputs you want to have
+              # 🚧 To-do: Choose which extra outputs you want to have
               extraOutputsToInstall = [ "man" "doc" ];
               #
-              # TODO: Install this package via `nix profile install '.#myStdPackages'`.
+              # 🚧 To-do: Install this package via `nix profile install '.#myStdPackages'`.
               #
-              # TODO: Check if manpages are available if chosen as extra output:
+              # 🚧 To-do: Check if manpages are available if chosen as extra output:
               # To make use of the manpages, usually nothing is required but
               # including `source "${HOME}/.nix-profile/etc/profile.d/nix.sh"`
               # somewhere in the `"${HOME}/.profile"` or `"${HOME}/.bash_profile"` or `"${HOME}/.zshenv"`.
               #
               # You can verify the inclusion of the revelant directories via `manpath --debug`.
               #
-              # TODO: Make shell-completion functional:
+              # 🚧 To-do: Make shell-completion functional:
               # With bash, everything should work out of the box.
               # With zsh, the following needs to be done somewhere in the `"${HOME}/.zshenv"`:
               # `fpath=("${HOME}/.nix-profile/share/zsh/site-functions" ${fpath})`
@@ -68,6 +68,6 @@
         }; # system
       }; # packages
 
-      # TODO for the author of this template: Integrate: https://www.tweag.io/blog/2020-07-31-nixos-flakes
+      # TODO: for the author of this template: Integrate: <https://www.tweag.io/blog/2020-07-31-nixos-flakes>
     }; # outputs
 }

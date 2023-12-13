@@ -1,16 +1,16 @@
 .ONESHELL:
 SHELL := /bin/bash
-.SHELLFLAGS := -euo pipefail -c
+.SHELLFLAGS := -eu -o pipefail -c
 
 # Cloudfoundry requires all applications that directly provide their docker-image,
 # the domain of the registry and the name of the repository.
-# TODO: You need to adapt these parameters with those for your own repository.
+# 🚧 To-do: You need to adapt these parameters with those for your own repository.
 DOCKER_REGISTRY := docker.io
 DOCKER_REPOSITORY := cf-rust-app
 
 BUILDPACK := paketo-community/rust@0.25.0
 
-# TODO: Adapt “rust_project_name”: It should match package name in Cargo.toml.
+# 🚧 To-do: Adapt “rust_project_name”: It should match package name in Cargo.toml.
 rust_project_name := cf-rust-app
 rust_src_files = $(shell find ./src -name '*.rs')
 

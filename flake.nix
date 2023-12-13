@@ -20,7 +20,7 @@
 
           For more on cloud-native buildpacks, see: <https://buildpacks.io>
 
-          There are some things you need to adapt following the `TODO`-comments in the flake.nix-file:
+          There are some things you need to adapt following the `🚧 To-do`-comments in the flake.nix-file:
             + Se the branch for nixos, to use in `nixpkgs.url`.
             + Adapt package-name and version-identifier.
             + Use cargo-lock file or switch to another mechanisms to ensure reproducability.
@@ -31,7 +31,7 @@
             + Adapt the app-name.
             + You must set the route.
 
-          There are as well some TODOs in the Makefile.
+          There are as well some `🚧 To-do`-comments in the Makefile.
             + Adapt docker-registry and repository.
             + Adapt the project-name.
         '';
@@ -49,7 +49,7 @@
           in the list and after an update, the installed software will be adapted. See the
           comments in the flake.nix.
 
-          There are some things you need to adapt following the `TODO`-comments in the flake.nix-file:
+          There are some things you need to adapt following the `🚧 To-do`-comments in the flake.nix-file:
             + Se the branch for nixos, to use in `nixpkgs.url`.
             + The parameter for `supported_system`.
             + Set `config.allowUnfree = true;` if you need to inlcude non-free software into your collections.
