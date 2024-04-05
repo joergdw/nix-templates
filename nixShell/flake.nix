@@ -4,11 +4,13 @@
   inputs = {
     # Choose your nix-branch from <https://github.com/NixOS/nixpkgs/branches>,
     # preferably stable ones!
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgsRepo.url = github:NixOS/nixpkgs/nixos-unstable;
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgsRepo }:
     let
+      nixpkgsLib = nixpkgsRepo.lib;
+
       # Instead of using the subsequent list of self-defined helpers, one could use
       # `flake-utils` as additional argument (this does not require an additional input)
       # which provides similar helpers and keeps them up-to-date.
@@ -20,17 +22,17 @@
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      forAllSystems = nixpkgsLib.genAttrs supportedSystems;
 
       # Nixpkgs instantiated for supported system types.
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system: import nixpkgsRepo { inherit system; });
     in {
       devShells = forAllSystems (system:
         let
-          pkgs = nixpkgsFor.${system};
+          nixpkgs = nixpkgsFor.${system};
         in {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
+          default = nixpkgs.mkShell {
+            buildInputs = with nixpkgs; [
               # List your packages here:
               # […]
             ];
