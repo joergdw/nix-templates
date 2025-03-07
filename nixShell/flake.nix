@@ -31,11 +31,18 @@
         let
           nixpkgs = nixpkgsFor.${system};
         in {
-          default = nixpkgs.mkShell {
-            buildInputs = with nixpkgs; [
+          # 🚸 For documentation on this, see:
+          # <https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell>
+          default = nixpkgs.mkShellNoCC {
+            packages = with nixpkgs; [
               # List your packages here:
               # […]
             ];
+
+            # # Bash statements that get executed on startup:
+            # shellHook = ''
+
+            # '';
           };
         });
     };
