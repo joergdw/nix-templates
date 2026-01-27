@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Templates for Nix-Flakes";
 
   outputs = { self }: {
     templates = {
@@ -64,6 +64,11 @@
       };
 
       default = self.templates.nixShell;
+
+      nixPkgsRepository = {
+        path = ./nixPkgsRepository;
+        description = "Flake-structure for a Nix-package-repository";
+      };
 
       nixShell = {
         path = ./nixShell;
