@@ -16,7 +16,10 @@
           inherit system;
         };
         lib = nixpkgs.lib;
-        callPackage = lib.customisation.callPackageWith nixpkgs;
+        callPkgContext = nixpkgs // {
+          inherit supportedSystems system;
+        };
+        callPackage = lib.customisation.callPackageWith callPkgContext;
       in {
         packages = {
           hello = callPackage ./packages/hello {};
