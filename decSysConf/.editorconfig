@@ -2,8 +2,8 @@
 # For a formal specification on how to write it, see: <https://spec.editorconfig.org>
 
 
-# Don't search for other `.editorconfig`s in parent-folders.
-root = true
+# # Don't search for other `.editorconfig`s in parent-folders.
+# root = true
 
 [*]
 charset = utf-8
