@@ -1,0 +1,16 @@
+# This file is intended for usage with all files in this directory or any of its subdirectories.
+# For a formal specification on how to write it, see: <https://spec.editorconfig.org>
+
+
+# Don't search for other `.editorconfig`s in parent-folders.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+
+[*.nix]
+indent_size = 3
+indent_style = space
